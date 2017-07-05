@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Button mainButton;
-    private TextView scoreView, timeView;
+    private TextView scoreView;
+    private TextView timeView;
     private GoogleApiClient apiClient;
 
     private static final String TAG = "MainActivity";
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
                         Log.e(TAG, "Could not connect to Play games services");
-
+                        finish();
                     }
                 }).build();
 
