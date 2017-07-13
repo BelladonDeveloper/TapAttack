@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
         timeView = (TextView) findViewById(R.id.time_view);
         buttonSignIn = (Button) findViewById(R.id.sign_in_button);
 
-        if (apiClient != null && apiClient.isConnected()) {
-            buttonSignIn.setText("Signout");
-        }
-
         mainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int responseCode, Intent intent) {
         super.onActivityResult(requestCode, responseCode, intent);
+
+        //If the user signs out on the Leaderboard or Achievements screen disconnect / reenable sign in from button
         if ((responseCode == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) && ((requestCode == 0) || (requestCode == 1))) {
             apiClient.stopAutoManage(this);
             apiClient.disconnect();
@@ -128,6 +126,4 @@ public class MainActivity extends AppCompatActivity {
                     }).build();
         }
     }
-
-
 }
