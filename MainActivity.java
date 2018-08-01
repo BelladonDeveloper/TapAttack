@@ -72,13 +72,6 @@ public class MainActivity extends AppCompatActivity {
         layoutSignin = findViewById(R.id.sign_in_bar); //layout for displaying Signin Elements
         layoutSignout = findViewById(R.id.sign_out_bar); //layout for displaying Signout Elements
 
-        //Added this to show Google Play Games Achievement Notifications - If statement because it can be null if user signsout
-        if (isSignedIn()) {
-            GamesClient gamesClient = Games.getGamesClient(MainActivity.this, GoogleSignIn.getLastSignedInAccount(this));
-            gamesClient.setViewForPopups(findViewById(R.id.gps_popup));
-        }
-
-
         //Used when the Google Signin button is pressed.
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,6 +377,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void onConnected(GoogleSignInAccount googleSignInAccount) {
         Log.d(TAG, "onConnected(): connected to Google APIs");
+        
+        //Added this to show Google Play Games Achievement Notifications - If statement because it can be null if user signsout
+        if (isSignedIn()) {
+            GamesClient gamesClient = Games.getGamesClient(MainActivity.this, GoogleSignIn.getLastSignedInAccount(this));
+            gamesClient.setViewForPopups(findViewById(R.id.gps_popup));
+        }
 
         mAchievementsClient = Games.getAchievementsClient(this, googleSignInAccount);
         mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
